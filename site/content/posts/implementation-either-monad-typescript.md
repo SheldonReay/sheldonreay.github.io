@@ -57,7 +57,7 @@ class Either<L, R> {
 
 We can already call this class like so, although we can't do much else right now:
 ```ts
-Either.left("Some Failure")       // In the case of failure
+Either.left("Some Error")         // In the case of an error
 Either.right("Success")           // In the case of success
 ```
 
