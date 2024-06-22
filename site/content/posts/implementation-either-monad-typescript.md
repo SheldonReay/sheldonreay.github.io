@@ -24,7 +24,7 @@ function validate(input: string): Either<ValidationError, string> {
     ...
 }
 ```
-We immediately know that the function `validate` can either return a `ValidationError` in the case of failure, and `string` in the case of success.
+We immediately know that the function `validate` can either return a `ValidationError` in the case of an error, and `string` in the case of success.
 
 Overall, it is essentially an alternative approach to the standard try catch method of exception handling you are likely already familiar with.
 
@@ -89,7 +89,7 @@ class Either<L, R> {
 
 At this point, we can already create a *Left* or *Right* **Either** instance with a value inside of it and check if its an error or a success:
 ```js
-const result = Either.left("Error!")
+const result = Either.left("Some Error")
 
 console.log(result.isLeft())        // Output: true
 console.log(result.isRight())       // Output: false
@@ -97,7 +97,7 @@ console.log(result.isRight())       // Output: false
 ```
 
 
-What we can't do yet is access the value inside of the Either (in this case it is `"Error"`), thats what we will do next.
+What we can't do yet is access the value inside of the Either (in this case it is `"Some Error"`), thats what we will do next.
 
 
 We now need a function which can handle the case where the Either is a Right, this we will call `map`. 
@@ -129,7 +129,7 @@ We also need a function to handle the case where the Either is a Left. We will c
 ```
 
 
-I mentioned earlier that we can chain together Either. This allows us to setup our program in such a way which resembles a pipeline, with each step neatly defined. The example below demonstrates how the value is passed down with each `map` function call.
+I mentioned earlier that we can chain Eithers together. This allows us to setup our program in such a way which resembles a pipeline, with each step neatly defined. The example below demonstrates how the value is passed down with each `map` function call.
 1. We initialise an Either Right with a string, `"Success"`
 2. We call the `map` function, the `map` function will check to see if the instance is a Right, if so, it will call the function passed as a parameter with the Right value.
 3. We concatenate "!" onto *it* and return *it*
